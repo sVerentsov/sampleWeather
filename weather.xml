@@ -11,6 +11,7 @@
 
     <context id="weather">
       <!-- Does some weather gathering stuff -->
+	  <output value="Cool!"/>
     </context>
   </input>
 </context>
