@@ -1,21 +1,15 @@
 <context>
-    <!-- Note that you need to create cities entity in your bot settings -->
-    <pattern name="City" value="entity://cities"/>
+  <input pattern="(hello|hi) *">
+    <output value="Hello $UserName!" if="full($UserName)"/>
 
-    <input pattern="* (weather|forecast) {[* $Date] [* $City]}">
-        <context id="weather">
-            <!-- This context will automatically extend a root one -->
+    <context if="empty($UserName)">
+      <output value="Hi! What is your name?"/>
 
-            <output value="There is a nice weather today!" if="empty($City)"/>
-            <output value="Looks like it is nice weather in $City!"/>
+      <input pattern="$Text">
+        <var name="UserName" value="$Text" scope="user"/>
+        <output value="Nice to meet you $UserName!"/>
+      </input>
 
-            <input>
-                <!-- Once weather context is activated, user can simply ask about different date or city or both of them -->
-                <pattern value="{(* $Date) [* $City]}"/>
-                <pattern value="* $City"/>
-
-                <context id="weather"/> <!-- Jump to the weather context to generate an output -->
-            </input>
-        </context>
-    </input>
+    </context>
+  </input>
 </context>
