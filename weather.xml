@@ -1,15 +1,16 @@
 <context>
-  <input pattern="(hello|hi) *">
-    <output value="Hello $UserName!" if="full($UserName)"/>
+  <input pattern="* (weather|forecast) * [$Date] *">
 
-    <context if="empty($UserName)">
-      <output value="Hi! What is your name?"/>
-
-      <input pattern="$Text">
-        <var name="UserName" value="$Text" scope="user"/>
-        <output value="Nice to meet you $UserName!"/>
+    <!-- If we don’t know where is our user from, we need to ask about that -->
+    <context if="empty($UserCity)">
+      <output value="Where are you from?"/>
+      <input pattern="$City">
+        <context id="weather"/> <!-- Jump to the "weather" context now -->
       </input>
+    </context>
 
+    <context id="weather">
+      <!-- Does some weather gathering stuff -->
     </context>
   </input>
 </context>
