@@ -1,17 +1,10 @@
 <context>
-  <input pattern="* (weather|forecast) * [$Date] *">
+  <input pattern="* (weather|forecast) [$Date]">
+    <output value="The weather is fine!"/> <!-- Nice response! -->
 
-    <!-- If we don’t know where is our user from, we need to ask about that -->
-    <context if="empty($UserCity)">
-      <output value="Where are you from?"/>
-      <input pattern="* City *">
-        <context id="weather"/> <!-- Jump to the "weather" context now -->
-      </input>
-    </context>
-
-    <context id="weather">
-      <!-- Does some weather gathering stuff -->
-	  <output value="Cool!"/>
+    <context id="weather_context">
+      <input pattern="* $Date"/>
+      <output value="It will be much better! $Date"/>
     </context>
   </input>
 </context>
