@@ -4,7 +4,7 @@
     <!-- If we don’t know where is our user from, we need to ask about that -->
     <context if="empty($UserCity)">
       <output value="Where are you from?"/>
-      <input pattern="$City">
+      <input pattern="$Text">
         <context id="weather"/> <!-- Jump to the "weather" context now -->
       </input>
     </context>
